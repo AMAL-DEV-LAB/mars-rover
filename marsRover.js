@@ -7,25 +7,94 @@
 // Obstacle detection, if a given sequence of commands encounters an obstacle, 
 //      the rover moves up to the last possible point and reports the obstacle.
 
-function marsRover (locationArray, direction, charArray) {
+$( document ).ready(function() {
+    //marsRover([0,0], 'N', ['f']);
+    var location = [0,0];
+    var direction = 'N';
+
+    console.log(location);
+
+    marsRover(location, direction, ['f']);
+});
+
+function marsRover(locationArray, direction, charArray) {
     // iterate over the character array of commands
-    // if character is an 'f' or a 'b' call the move function (passing character and direction)
-    // if the character is a 'l' or 'r' call turn function (passing character and direction)
+
+    for (var i = 0; i < charArray.length; i++) {
+        // if character is an 'f' or a 'b' call the move function (passing character and direction)
+        if (charArray[i] == 'f' || charArray[i] == 'b' ) {
+            move(charArray[i], direction, locationArray);
+        } else {
+            // if the character is a 'l' or 'r' call turn function (passing character and direction)
+            turn(charArray[i], direction); 
+        }
+     }
     // when iteration is complete return final location
 }
 
-function move (charCommand, direction) {
+function move (charCommand, direction, locationArray) {
+    var xMove = 0; var yMove = 0; 
+
+    console.log(charCommand);
+    console.log(direction);
+    console.log(locationArray);
     // need to check the command and the direction
-    // if the command is forward and facing N then we check for obstacle and increment Y coordinate
-    // if the command is forward and facing S then we check for obstacle and  decrement the Y coordinate
-    // if the command is forward and facing E then we check for obstacle and  increment the X coordinate
-    // if the command is forward and facing W then we check for obstacle and  decrement the X coordinate
+    if (charCommand == 'f') {
+        switch (direction) {
+            // if the command is forward and facing N then we check for obstacle and increment Y coordinate
+            case "N":
+                // increment Y location
+                yMove++;
+                break;
+            // if the command is forward and facing S then we check for obstacle and  decrement the Y coordinate
+            case "S":
+                // decrement Y location
+                yMove--;
+                break;
+            // if the command is forward and facing E then we check for obstacle and  increment the X coordinate
+            case "E":
+                // incrememnt X location
+                xMove++;
+                break;
+            // if the command is forward and facing W then we check for obstacle and  decrement the X coordinate
+            case "W":
+                // decrement x location
+                xMove--;
+                break;
+            default:
+                console.log("No direction given.");
+        }
+    } else if (charCommand == 'b') {
+        switch (direction) {
+            // if the command is backward and facing N then we check for obstacle and decrement Y coordinate
+            case "N":
+                // decrement Y location
+                yMove--;
+                break;
+            // if the command is backward and facing S then we check for obstacle and  increment the Y coordinate
+            case "S":
+                // increment Y location
+                yMove++;
+                break;
+            // if the command is backward and facing E then we check for obstacle and  decrement the X coordinate
+            case "E":
+                // decrement X location
+                xMove--;
+                break;
+            // if the command is backward and facing W then we check for obstacle and  increment the X coordinate
+            case "W":
+                // increment x location
+                xMove++;
+                break;
+            default:
+                console.log("No direction given.");
+        }
+    }
 
-    // if the command is backward and facing N then we check for obstacle and decrement Y coordinate
-    // if the command is backward and facing S then we check for obstacle and  increment the Y coordinate
-    // if the command is backward and facing E then we check for obstacle and  decrement the X coordinate
-    // if the command is backward and facing W then we check for obstacle and  increment the X coordinate
+    locationArray[0] += xMove;
+    locationArray[1] += yMove;
 
+    console.log(locationArray);
     // check if the location has an obstacle
     // if it does return current position otherwise continue
 }
