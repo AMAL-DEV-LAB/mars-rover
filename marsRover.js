@@ -10,11 +10,8 @@
 $( document ).ready(function() {
     //marsRover([0,0], 'N', ['f']);
     var location = [0,0];
-    var direction = 'N';
-
-    console.log(location);
-
-    marsRover(location, direction, ['f']);
+    var direction = 'S';
+    marsRover(location, direction, ['f', 'b', 'f']);
 });
 
 function marsRover(locationArray, direction, charArray) {
@@ -100,6 +97,50 @@ function move (charCommand, direction, locationArray) {
 }
 
 function turn (charCommand, direction) {
+    // check the command 
+    if (charCommand == 'l') {
+        switch (direction) {
+            // if the direction is N turning left faces W
+            case "N":
+                direction = 'W';
+                break;
+            // if the direction is S turning left faces E
+            case "S":
+                direction = 'E';
+                break;
+            // if the direction is E turning left faces N
+            case "E":
+                direction = 'N';
+                break;
+            // if the direction is W turning left faces S
+            case "W":
+                direction = 'S';
+                break;
+            default:
+                console.log("No direction given.");
+        }
+    } else if (charCommand == 'r') {
+        switch (direction) {
+            // if the direction is N turning right faces E
+            case "N":
+                direction = 'E';
+                break;
+            // if the direction is S turning right faces W
+            case "S":
+                direction = 'W';
+                break;
+            // if the direction is E turning right faces S
+            case "E":
+                direction = 'S';
+                break;
+            // if the direction is W turning right faces N
+            case "W":
+                direction = 'N';
+                break;
+            default:
+                console.log("No direction given.");
+        }
+    }
     // check which direction you are currently in 
     // change directions based on command 
     // return new direction
