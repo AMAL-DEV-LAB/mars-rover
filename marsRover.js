@@ -6,3 +6,6 @@
 // Functionality for wrapping  from one edge of the grid to another. 
 // Obstacle detection, if a given sequence of commands encounters an obstacle, 
 //      the rover moves up to the last possible point and reports the obstacle.
+function marsRover () {
+    
+}
