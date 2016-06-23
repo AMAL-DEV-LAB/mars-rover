@@ -10,8 +10,8 @@
 $( document ).ready(function() {
     //marsRover([0,0], 'N', ['f']);
     var location = [0,0];
-    var direction = 'S';
-    marsRover(location, direction, ['f', 'b', 'f']);
+    var direction = 'N';
+    marsRover(location, direction, ['f', 'l', 'f', 'r', 'b']);
 });
 
 function marsRover(locationArray, direction, charArray) {
@@ -23,18 +23,17 @@ function marsRover(locationArray, direction, charArray) {
             move(charArray[i], direction, locationArray);
         } else {
             // if the character is a 'l' or 'r' call turn function (passing character and direction)
-            turn(charArray[i], direction); 
+            direction = turn(charArray[i], direction); 
+            console.log(direction);
         }
      }
+     
+     console.log(locationArray);
     // when iteration is complete return final location
 }
 
 function move (charCommand, direction, locationArray) {
     var xMove = 0; var yMove = 0; 
-
-    console.log(charCommand);
-    console.log(direction);
-    console.log(locationArray);
     // need to check the command and the direction
     if (charCommand == 'f') {
         switch (direction) {
@@ -141,6 +140,7 @@ function turn (charCommand, direction) {
                 console.log("No direction given.");
         }
     }
+    return direction; 
     // check which direction you are currently in 
     // change directions based on command 
     // return new direction
