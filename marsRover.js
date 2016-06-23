@@ -10,17 +10,20 @@
 $( document ).ready(function() {
     //marsRover([0,0], 'N', ['f']);
     var location = [0,0];
+    var obstacle = [-1, 1];
     var direction = 'N';
-    marsRover(location, direction, ['f', 'l', 'f', 'r', 'b']);
+    marsRover(location, direction, ['f', 'l', 'f', 'r', 'b'], obstacle);
 });
 
-function marsRover(locationArray, direction, charArray) {
+function marsRover(locationArray, direction, charArray, obstacle) {
     // iterate over the character array of commands
 
     for (var i = 0; i < charArray.length; i++) {
         // if character is an 'f' or a 'b' call the move function (passing character and direction)
         if (charArray[i] == 'f' || charArray[i] == 'b' ) {
-            move(charArray[i], direction, locationArray);
+            if(!move(charArray[i], direction, locationArray, obstacle)) {
+                return;
+            }
         } else {
             // if the character is a 'l' or 'r' call turn function (passing character and direction)
             direction = turn(charArray[i], direction); 
@@ -32,7 +35,7 @@ function marsRover(locationArray, direction, charArray) {
     // when iteration is complete return final location
 }
 
-function move (charCommand, direction, locationArray) {
+function move (charCommand, direction, locationArray, obstacle) {
     var xMove = 0; var yMove = 0; 
     // need to check the command and the direction
     if (charCommand == 'f') {
@@ -87,10 +90,21 @@ function move (charCommand, direction, locationArray) {
         }
     }
 
-    locationArray[0] += xMove;
-    locationArray[1] += yMove;
+    var nextLocation = [locationArray[0] + xMove, locationArray[1] + yMove];
+    if(!obstacleCheck(nextLocation, obstacle)) {
+        var message = "Obstacle encountered at: " + nextLocation 
+        + " rover ended at " + locationArray; 
+        console.log(message);
+        return false; 
+    } else {
+        locationArray[0] += xMove;
+        locationArray[1] += yMove;
+        var message = "Rover moved to " + locationArray + "."; 
+    }
 
-    console.log(locationArray);
+    console.log(message);
+    return true;
+
     // check if the location has an obstacle
     // if it does return current position otherwise continue
 }
@@ -146,7 +160,11 @@ function turn (charCommand, direction) {
     // return new direction
 }
 
-function obstacleCheck (possibleLoc) {
+function obstacleCheck (possibleLoc, obstacleLoc) {
     // check if the next possible location has an obstacle
-    // if there is an obstacle return with the possibleLoc as the obstacle location
+    if (possibleLoc.toString() == obstacleLoc.toString()){
+        return false;
+    }
+            
+    return true; 
 } 
