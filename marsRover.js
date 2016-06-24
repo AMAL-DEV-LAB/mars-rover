@@ -9,19 +9,21 @@
 
 $( document ).ready(function() {
     //marsRover([0,0], 'N', ['f']);
-    var location = [0,0];
+    var location = [0,9];
     var obstacle = [-1, 1];
+    var gridSize = [10, 10];
     var direction = 'N';
-    marsRover(location, direction, ['f', 'l', 'f', 'r', 'b'], obstacle);
+    //marsRover(location, direction, ['f', 'l', 'f', 'r', 'b'], obstacle, gridSize);
+    marsRover(location, direction, ['f', 'f', 'r', 'f'], obstacle, gridSize);
 });
 
-function marsRover(locationArray, direction, charArray, obstacle) {
+function marsRover(locationArray, direction, charArray, obstacle, grid) {
     // iterate over the character array of commands
 
     for (var i = 0; i < charArray.length; i++) {
         // if character is an 'f' or a 'b' call the move function (passing character and direction)
         if (charArray[i] == 'f' || charArray[i] == 'b' ) {
-            if(!move(charArray[i], direction, locationArray, obstacle)) {
+            if(!move(charArray[i], direction, locationArray, obstacle, grid)) {
                 return;
             }
         } else {
@@ -30,12 +32,9 @@ function marsRover(locationArray, direction, charArray, obstacle) {
             console.log(direction);
         }
      }
-     
-     console.log(locationArray);
-    // when iteration is complete return final location
 }
 
-function move (charCommand, direction, locationArray, obstacle) {
+function move (charCommand, direction, locationArray, obstacle, grid) {
     var xMove = 0; var yMove = 0; 
     // need to check the command and the direction
     if (charCommand == 'f') {
@@ -101,6 +100,8 @@ function move (charCommand, direction, locationArray, obstacle) {
         locationArray[1] += yMove;
         var message = "Rover moved to " + locationArray + "."; 
     }
+
+    locationArray = gridCheck(locationArray, grid);
 
     console.log(message);
     return true;
@@ -168,3 +169,15 @@ function obstacleCheck (possibleLoc, obstacleLoc) {
             
     return true; 
 } 
+
+function gridCheck (nextLoc, grid) {
+    if(nextLoc[0] == grid[0]) {
+        nextLoc[0] = nextLoc[0] * -1; 
+    } 
+
+    if(nextLoc[1] == grid[1]) {
+        nextLoc[1] = nextLoc[1] * -1; 
+    } 
+
+    return nextLoc; 
+}
