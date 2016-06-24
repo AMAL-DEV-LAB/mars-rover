@@ -7,19 +7,16 @@
 // Obstacle detection, if a given sequence of commands encounters an obstacle, 
 //      the rover moves up to the last possible point and reports the obstacle.
 
-$( document ).ready(function() {
-    //marsRover([0,0], 'N', ['f']);
-    var location = [0,9];
-    var obstacle = [-1, 1];
+$(document).ready(function() {
+    var location = [0,0];
+    var obstacle = [0, 9];
     var gridSize = [10, 10];
     var direction = 'N';
-    //marsRover(location, direction, ['f', 'l', 'f', 'r', 'b'], obstacle, gridSize);
-    marsRover(location, direction, ['f', 'f', 'r', 'f'], obstacle, gridSize);
+    marsRover(location, direction, ['f'], obstacle, gridSize); 
 });
 
-function marsRover(locationArray, direction, charArray, obstacle, grid) {
+function marsRover (locationArray, direction, charArray, obstacle, grid) {
     // iterate over the character array of commands
-
     for (var i = 0; i < charArray.length; i++) {
         // if character is an 'f' or a 'b' call the move function (passing character and direction)
         if (charArray[i] == 'f' || charArray[i] == 'b' ) {
@@ -102,7 +99,6 @@ function move (charCommand, direction, locationArray, obstacle, grid) {
     }
 
     locationArray = gridCheck(locationArray, grid);
-
     console.log(message);
     return true;
 
@@ -155,10 +151,8 @@ function turn (charCommand, direction) {
                 console.log("No direction given.");
         }
     }
-    return direction; 
-    // check which direction you are currently in 
-    // change directions based on command 
     // return new direction
+    return direction; 
 }
 
 function obstacleCheck (possibleLoc, obstacleLoc) {
@@ -174,10 +168,8 @@ function gridCheck (nextLoc, grid) {
     if(nextLoc[0] == grid[0]) {
         nextLoc[0] = nextLoc[0] * -1; 
     } 
-
     if(nextLoc[1] == grid[1]) {
         nextLoc[1] = nextLoc[1] * -1; 
     } 
-
     return nextLoc; 
 }
