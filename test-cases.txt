@@ -1,7 +1,7 @@
 
 ////TEST CASES 
 
-Instruction: Place the code below inbetween the document ready function to run one of the scenarios below.
+Instruction: Place the code below inbetween the document ready function in the marsRover.js file to run one of the scenarios below.
 
     /*TEST 1: Moving off the grid to the other side */
     var location = [0,9];
