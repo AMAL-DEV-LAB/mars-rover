@@ -1,0 +1,61 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input-container.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input-container.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input-char-counter.html">
+
+<dom-module id="mars-rover">
+
+  <template>
+    <style include="shared-styles">
+      @import "mars-rover/mars-rover";
+    </style>
+
+    <paper-input-container class="Page-formInput" disabled>
+      <label for="locationInput">Update text to change the location</label>
+      <!-- Listens for "input" event and sets greeting to <input>.value -->
+      <input is="iron-input" id="locationInput" value="{{location::input}}">
+      <paper-input-char-counter></paper-input-char-counter>
+    </paper-input-container>
+
+
+    <paper-input-container class="Page-formInput">
+      <label for="directionInput">Rover starting location:</label>
+      <!-- Listens for "input" event and sets greeting to <input>.value -->
+      <input is="iron-input" id="directionInput" value="{{direction::input}}">
+      <paper-input-char-counter></paper-input-char-counter>
+    </paper-input-container>
+
+
+    <paper-input-container disabled class="Page-formInput">
+      <label for="gridInput">Grid size</label>
+      <!-- Listens for "input" event and sets greeting to <input>.value -->
+      <input is="iron-input" id="gridInput" value="{{gridSize::input}}">
+      <paper-input-char-counter></paper-input-char-counter>
+    </paper-input-container>
+
+
+    <paper-input-container class="Page-formInput">
+      <label for="commandsInput">Update text to change the commands</label>
+      <!-- Listens for "input" event and sets greeting to <input>.value -->
+      <input is="iron-input" id="obstacleInput" value="{{commands::input}}">
+      <paper-input-char-counter></paper-input-char-counter>
+    </paper-input-container>
+
+    <paper-button raised id="move" on-click="_marsRover">Move BB8</paper-button>   
+    <paper-toast id="toast" text="{{message}}"></paper-toast> 
+  </template>
+
+  <script src="mars-rover.js"></script>
+
+</dom-module>
