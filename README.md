@@ -7,8 +7,11 @@ The "dist" folder is a vulcanized version of the code which can be found under t
 
 Quick view:
 - app
+
     -- elements
+
         --- mars-rover
+        
             ---- mars-rover.css
             ---- mars.rover.html
             ---- mars.rover.js
