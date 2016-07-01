@@ -87,7 +87,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         yMove *= -1;
       }
       var nextLocation = [this.location[0] + xMove, this.location[1] + yMove];
-      if (!this._obstacleCheck(nextLocation, this.obstacle)) {
+      if (!this._obstacleCheck(nextLocation)) {
         this.message = "Obstacle encountered at: " + nextLocation
           + " rover ended at " + this.location;
         this.$.toast.open();
@@ -119,9 +119,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       // return new direction
       return currentDirection;
     },
-    _obstacleCheck: function (possibleLoc, obstacleLoc) {
+    _obstacleCheck: function (possibleLoc) {
       // check if the next possible location has an obstacle
-      if (possibleLoc.toString() == obstacleLoc.toString()) {
+      if (possibleLoc.toString() == this.obstacle.toString()) {
         return false;
       }
       return true;
